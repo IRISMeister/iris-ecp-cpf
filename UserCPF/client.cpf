@@ -5,6 +5,7 @@ WebServer=1
 
 [ECPServers]
 IRIS-0=server,1972
+IRIS-1=fhirserver,1972
 
 [config]
 globals=0,0,32,0,0,0

@@ -25,15 +25,24 @@ Place valid iris.key under license/ .
 http://localhost:52773/csp/sys/%25CSP.Portal.Home.zen
 http://localhost:52774/csp/sys/%25CSP.Portal.Home.zen
 http://localhost:52775/csp/sys/%25CSP.Portal.Home.zen
+
 Use _SYSTEM / SYS as a credential.
 
 http://localhost:8080/csp/bin/Systems/Module.cxw
+
 Use CSPSystem / SYS as a credential.
 
 ## App endpoint
-http://localhost:8080/...
 
+```
 http://localhost:8080/api/monitor/metrics
+```
+
+FHIR Server
+```
+curl http://localhost:52780/fhir/r4/Patient/1
+```
+
 
 ## To stop/run
 ```

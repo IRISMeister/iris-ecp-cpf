@@ -1,0 +1,3 @@
+[submodule "iris-fhir-template"]
+	path = iris-fhir-template
+	url = https://github.com/intersystems-community/iris-fhir-template.git

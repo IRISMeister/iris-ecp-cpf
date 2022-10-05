@@ -16,24 +16,6 @@ services:
     volumes:
     - ./UserCPF:/home/irisowner/cpf
     - ./lisense:/lisense/
-
-  fhirserver:
-    hostname: fhirserver
-    build: 
-      context: ./iris-fhir-template
-    command: 
-      --key /lisense/iris.key
-      --check-caps false
-    restart: always
-    ports: 
-    - "52780:52773"
-    environment:
-    - TZ=JST-9
-    - ISC_CPF_MERGE_FILE=/home/irisowner/cpf/server.cpf
-    volumes:
-    - ./UserCPF:/home/irisowner/cpf
-    - ./lisense:/lisense/
-
   client:
     hostname: client
     image: containers.intersystems.com/intersystems/iris:2022.1.0.209.0

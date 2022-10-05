@@ -1,0 +1,97 @@
+version: '3.6'
+services:
+  server:
+    hostname: server
+    build: 
+      context: ./build
+    command: 
+      --key /lisense/iris.key
+      --check-caps false
+    restart: always
+    ports: 
+    - "52773:52773"
+    environment:
+    - TZ=JST-9
+    - ISC_CPF_MERGE_FILE=/home/irisowner/cpf/server.cpf
+    volumes:
+    - ./UserCPF:/home/irisowner/cpf
+    - ./lisense:/lisense/
+
+  client:
+    hostname: client
+    image: containers.intersystems.com/intersystems/iris:2022.1.0.209.0
+    command: 
+      --key /lisense/iris.key
+      --check-caps false
+    restart: always
+    depends_on:
+      - server
+    ports: 
+    - "52774:52773"
+    environment:
+    - TZ=JST-9
+    - ISC_CPF_MERGE_FILE=/home/irisowner/cpf/client.cpf
+    volumes:
+    - ./UserCPF:/home/irisowner/cpf
+    - ./lisense:/lisense/
+
+  client2:
+    hostname: client2
+    image: containers.intersystems.com/intersystems/iris:2022.1.0.209.0
+    command: 
+      --key /lisense/iris.key
+      --check-caps false
+    restart: always
+    depends_on:
+      - server
+    ports: 
+    - "52775:52773"
+    environment:
+    - TZ=JST-9
+    - ISC_CPF_MERGE_FILE=/home/irisowner/cpf/client.cpf
+    volumes:
+    - ./UserCPF:/home/irisowner/cpf
+    - ./lisense:/lisense/
+
+  client3:
+    hostname: client3
+    image: containers.intersystems.com/intersystems/iris:2022.1.0.209.0
+    command: 
+      --key /lisense/iris.key
+      --check-caps false
+    restart: always
+    depends_on:
+      - server
+    ports: 
+    - "52776:52773"
+    environment:
+    - TZ=JST-9
+    - ISC_CPF_MERGE_FILE=/home/irisowner/cpf/client.cpf
+    volumes:
+    - ./UserCPF:/home/irisowner/cpf
+    - ./lisense:/lisense/
+
+  webgw:
+    hostname: webgw
+    image: containers.intersystems.com/intersystems/webgateway:2022.1.0.209.0
+    init: true
+    restart: on-failure
+    depends_on:
+      - server
+      - client
+      - client2
+      - client3
+    ports:
+      - "8080:80"
+    volumes:
+      - webconfig:/config.d
+      - ./webgatewayconfig:/websetup
+    environment:
+      - ISC_DATA_DIRECTORY=/config.d
+      - ISC_CSP_INI_FILE=/websetup/CSP.ini
+      - ISC_CSP_CONF_FILE=/websetup/CSP.conf
+    command: 
+      - /bin/bash -c "/configHttpd.sh && apache2ctl start" 
+
+volumes:
+  webconfig: ~

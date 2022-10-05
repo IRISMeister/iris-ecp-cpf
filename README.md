@@ -3,6 +3,13 @@ One of a CPF merger example.
 ECP Clients + ECP Server + WebGwateway(as load balancer).
 
 ## prep
+
+```
+git clone --recursive https://github.com/IRISMeister/iris-ecp-cpf.git
+cd iris-ecp-cpf
+cp Dockerfile.fhir iris-fhir-template/Dockerfile
+```
+
 Install docker compose plugin.
 
 ```bash

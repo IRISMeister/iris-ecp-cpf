@@ -1,5 +1,5 @@
 # IRIS-ECP-CPF
-One of a CPF merger example.  
+Yet another CPF merger example.  
 ECP Clients + ECP Server + WebGwateway(as load balancer).
 
 ## prep
@@ -40,16 +40,11 @@ http://localhost:8080/csp/bin/Systems/Module.cxw
 Use CSPSystem / SYS as a credential.
 
 ## App endpoint
-
+There is no app.
+You can try following end point, though.
 ```
 http://localhost:8080/api/monitor/metrics
 ```
-
-FHIR Server
-```
-curl http://localhost:52780/fhir/r4/Patient/1
-```
-
 
 ## To stop/run
 ```
